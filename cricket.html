@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cricket Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🏏 Cricket Game</h1>
+  <p>Click to hit the ball! Score runs randomly.</p>
+  <button onclick="playCricket()">Hit Ball</button>
+  <p id="cricket-score">Score: 0</p>
+  <script>
+    let score = 0;
+    function playCricket() {
+      const run = Math.floor(Math.random() * 7);
+      if (run === 0) {
+        alert("Out!");
+        score = 0;
+      } else {
+        score += run;
+      }
+      document.getElementById('cricket-score').innerText = "Score: " + score;
+    }
+  </script>
+</body>
+</html>

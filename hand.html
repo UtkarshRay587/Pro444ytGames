@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hand Reflex Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🖐 Hand Reflex Game</h1>
+  <p>Click as fast as you can within 5 seconds!</p>
+  <button id="hand-btn" onclick="clickCount()">Click Me!</button>
+  <p id="hand-result">Clicks: 0</p>
+  <script>
+    let clicks = 0, started = false;
+    function clickCount() {
+      if (!started) {
+        started = true;
+        setTimeout(() => {
+          alert("Time's up! You clicked " + clicks + " times.");
+          clicks = 0; started = false;
+        }, 5000);
+      }
+      clicks++;
+      document.getElementById("hand-result").innerText = "Clicks: " + clicks;
+    }
+  </script>
+</body>
+</html>

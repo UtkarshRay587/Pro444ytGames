@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .grid { display: grid; grid-template-columns: repeat(3, 100px); margin: 20px auto; }
+    .cell { width: 100px; height: 100px; font-size: 32px; text-align: center; line-height: 100px; border: 1px solid #000; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>❌ Tic Tac Toe</h1>
+  <div class="grid" id="grid"></div>
+  <p id="ttt-status">Player X's turn</p>
+  <script>
+    const grid = document.getElementById('grid');
+    let cells = Array(9).fill("");
+    let currentPlayer = "X";
+    function checkWin() {
+      const winPatterns = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+      for (const [a,b,c] of winPatterns) {
+        if (cells[a] && cells[a] === cells[b] && cells[b] === cells[c]) return cells[a];
+      }
+      return cells.includes("") ? null : "Draw";
+    }
+    function render() {
+      grid.innerHTML = "";
+      cells.forEach((val, i) => {
+        const cell = document.createElement("div");
+        cell.className = "cell";
+        cell.textContent = val;
+        cell.onclick = () => {
+          if (!val && !checkWin()) {
+            cells[i] = currentPlayer;
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+            const result = checkWin();
+            document.getElementById("ttt-status").textContent = result ? (result === "Draw" ? "It's a draw!" : `${result} wins!`) : `Player ${currentPlayer}'s turn`;
+            render();
+          }
+        };
+        grid.appendChild(cell);
+      });
+    }
+    render();
+  </script>
+</body>
+</html>
